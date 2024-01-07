@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>
+      try {
+        eruda.init({
+          defaults: {
+            displaySize: 30,
+            theme: "Atom One Dark",
+            transparency: 1,
+          },
+        });
+        if (localStorage.getItem("eruda-auto-show") === "1") eruda.show();
+        window.addEventListener("keydown", (e) => {
+          const { key, ctrlKey } = e;
+          if (key === "e" && ctrlKey) {
+            e.preventDefault();
+            if (localStorage.getItem("eruda-auto-show") === "1") {
+              localStorage.setItem("eruda-auto-show", "0");
+              eruda.hide();
+            } else {
+              localStorage.setItem("eruda-auto-show", "1");
+              eruda.show();
+            }
+          }
+        });
+      } catch (e) {
+        alert(e);
+      }
+    </script>
+    <div
+      id="screen-controllers"
+      class="w-full h-screen flex justify-center items-center"
+    >
+      <div
+        id="controllers"
+        class="border-2 border-black rounded-3xl p-5 flex flex-col items-start"
+      ></div>
+    </div>
+
+    <div
+      id="screen-test"
+      class="w-full h-screen flex justify-center items-center gap-10 flex-col"
+    >
+      <div class="flex gap-10">
+        <div class="relative border-black border-4 w-4 h-64">
+          <div class="bg-black w-full absolute left-0" id="test-1"></div>
+        </div>
+        <div class="relative border-black border-4 w-4 h-64">
+          <div class="bg-black w-full absolute left-0" id="test-2"></div>
+        </div>
+      </div>
+      <div class="flex gap-10">
+        <div class="relative border-black border-4 w-64 h-4">
+          <div class="bg-black h-full absolute top-0" id="test-3"></div>
+        </div>
+        <div class="relative border-black border-4 w-64 h-4">
+          <div class="bg-black h-full absolute top-0" id="test-4"></div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
